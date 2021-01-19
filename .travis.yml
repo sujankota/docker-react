@@ -9,3 +9,17 @@ script:
   - docker run -e CI=true sreddy/docker-react npm run test -- --coverage
 
 language: generic
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "docker"
+  env: "Docker-env"
+  bucket_name: "elasticbeanstalk-us-west-2-870033201739"
+  bucket_path: "docker"
+  on:
+    branch: master
+  access_key_id: $AWS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_ACCESS_KEY"
+
